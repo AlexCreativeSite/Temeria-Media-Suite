@@ -12,7 +12,7 @@
 ========================= */
 
 const CONFIG = {
-  user: "AlexCaos75",
+  user: "AlexCreativeSite",
   repo: "Temeria-Media-Suite",
   branch: "main",
 
@@ -21,10 +21,10 @@ const CONFIG = {
   videoFolder: "assets/video",
 
   fallbackOGImage:
-    "https://alexcaos75.github.io/Temeria-Media-Suite/assets/thumb/default.jpg",
+    "https://alexcreativesite.github.io/Temeria-Media-Suite/assets/thumb/default.jpg",
 
   githubApi: "https://api.github.com",
-  base: "https://alexcaos75.github.io/Temeria-Media-Suite",
+  base: "https://alexcreativesite.github.io/Temeria-Media-Suite",
 
   retryAttempts: 8,
   retryDelay: 1500,
@@ -33,7 +33,6 @@ const CONFIG = {
 };
 
 let publishLock = false;
-
 /* =========================
    BASIC HELPERS
 ========================= */
