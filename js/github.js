@@ -675,8 +675,3 @@ async function publishCardToGitHub(){
 window.publishCardToGitHub = publishCardToGitHub;
 
 })();
-'''
-
-out = Path("/mnt/data/github.js")
-out.write_text(js, encoding="utf-8")
-print(out)
