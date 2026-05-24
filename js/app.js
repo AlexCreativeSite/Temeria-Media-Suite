@@ -91,18 +91,28 @@ function importaDaHTML(){
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, "text/html");
 
+    doc.querySelectorAll("script, style, iframe, button, nav").forEach(el => el.remove());
+
     const title =
       doc.querySelector("h1,h2,.title")?.textContent?.trim() || "";
 
-    const text =
-      doc.body?.textContent?.trim() || "";
+    const paragraphs = [...doc.querySelectorAll("p, .frase, .text, .card-text")]
+      .map(el => el.textContent.trim())
+      .filter(Boolean);
+
+    const cleanText = paragraphs.length
+      ? paragraphs.join("\n\n")
+      : (doc.body?.textContent || "")
+          .replace(/\s+/g, " ")
+          .trim()
+          .slice(0, 500);
 
     if(document.getElementById("titolo")){
       document.getElementById("titolo").value = title;
     }
 
     if(document.getElementById("frase")){
-      document.getElementById("frase").value = text.slice(0, 500);
+      document.getElementById("frase").value = cleanText.slice(0, 500);
     }
 
     if(typeof window.genera === "function"){
