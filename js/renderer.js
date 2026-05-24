@@ -208,25 +208,17 @@ titleFontFamily,  mainFontStyle, mainLetterSpacing, extraStyle, cardWidth, cardR
      WHATSAPP
   ========================= */
 
-  if(state.style.socialExport === "whatsapp"){
+if(state.style.socialExport === "whatsapp"){
 
-   const shortPhrase =
-  (state.content.phrase || "")
-    .replace(/\n/g," ")
-    .trim()
-    .slice(0, 90);
-
-const shareText =
-`${state.content.title || "Temeria Card"}
-
-${shortPhrase}...
+  const shareText =
+`Alex Creative Site
 
 ${url}`;
 
-    const wa =
-      encodeURIComponent(shareText);
+  const wa =
+    encodeURIComponent(shareText);
 
-    return `
+  return `
 <div style="margin-top:25px;text-align:center;">
 
 <a
@@ -250,7 +242,7 @@ box-shadow:0 0 35px rgba(37,211,102,.28);
 </a>
 
 </div>`;
-  }
+}
 
   /* =========================
      FACEBOOK
