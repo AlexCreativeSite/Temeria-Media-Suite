@@ -236,13 +236,10 @@ titleFontFamily,  mainFontStyle, mainLetterSpacing, extraStyle, cardWidth, cardR
 
 if(state.style.socialExport === "whatsapp"){
 
-  const shareText =
-`Alex Creative Site
-
-${url}`;
+  const cleanUrl = url;
 
   const wa =
-    encodeURIComponent(shareText);
+    encodeURIComponent(cleanUrl);
 
   return `
 <div style="margin-top:25px;text-align:center;">
@@ -250,6 +247,7 @@ ${url}`;
 <a
 href="https://wa.me/?text=${wa}"
 target="_blank"
+rel="noopener"
 
 style="
 display:inline-block;
