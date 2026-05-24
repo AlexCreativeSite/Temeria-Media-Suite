@@ -473,7 +473,7 @@ function buildOGMeta(state, url){
   const image =
     state.media?.mainImagePublic ||
     state.github?.ogImageUrl ||
-    "https://alexcaos75.github.io/Temeria-Media-Suite/assets/thumb/default.jpg";
+    "https://alexcreativesite.github.io/Temeria-Media-Suite/assets/thumb/default.jpg";
 
   let img = image;
 
