@@ -723,34 +723,53 @@ function saveGitHubToken(){
 }
 </script>
 <script>
-function saveToHistory(){
+window.saveToHistory = function(){
+
   try{
-    const data = window.TemeriaForge?.collectState
-      ? window.TemeriaForge.collectState()
-      : {};
+
+    const titolo =
+      document.getElementById("titolo")?.value ||
+      "Card Temeria";
+
+    const frase =
+      document.getElementById("frase")?.value || "";
 
     const history =
-      JSON.parse(localStorage.getItem("TEMERIA_CARD_HISTORY") || "[]");
+      JSON.parse(
+        localStorage.getItem("TEMERIA_CARD_HISTORY") || "[]"
+      );
 
     history.unshift({
       id: Date.now(),
-      title: document.getElementById("titolo")?.value || "Card Temeria",
-      date: new Date().toLocaleString(),
-      data
+      title: titolo,
+      frase: frase,
+      date: new Date().toLocaleString()
     });
 
     localStorage.setItem(
       "TEMERIA_CARD_HISTORY",
-      JSON.stringify(history.slice(0, 30))
+      JSON.stringify(history.slice(0,30))
     );
 
+    console.log("History salvata", history);
+
     alert("Card salvata in History.");
-    if(typeof renderHistory === "function") renderHistory();
+
+    if(typeof renderHistory === "function"){
+      renderHistory();
+    }
 
   }catch(err){
+
     console.error(err);
-    alert("Errore salvataggio History.");
+
+    alert(
+      "Errore salvataggio History: " +
+      err.message
+    );
+
   }
+
 }
 </script>
 <script>
@@ -784,4 +803,4 @@ renderHistory();
 </script>
 </body>
 
-</html>
+</html>
