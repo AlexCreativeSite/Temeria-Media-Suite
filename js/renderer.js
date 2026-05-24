@@ -166,10 +166,36 @@ if(state.style.textMood === "parchment"){
       mainTextColor = "#334155";
       extraStyle += `border:1px solid rgba(0,0,0,.08);box-shadow:0 18px 50px rgba(0,0,0,.12);`;
     }
-    if(state.style.cardStyle === "glass"){
-      cardBackground = "rgba(255,255,255,.08)";
-      extraStyle += `backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.18);`;
-    }
+   if(state.style.cardStyle === "glass"){
+
+  cardBackground = `
+    linear-gradient(
+      180deg,
+      rgba(15,23,42,.72),
+      rgba(30,41,59,.58)
+    )
+  `;
+
+  extraStyle += `
+
+    backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.12);
+
+    box-shadow:
+
+      0 0 25px rgba(0,0,0,.35),
+
+      0 0 35px ${theme.accent},
+
+      0 0 80px ${theme.accent3},
+
+      0 0 140px ${theme.accent4},
+
+      inset 0 0 18px rgba(255,255,255,.05);
+
+  `;
+}
     if(state.style.cardStyle === "classic"){
       extraStyle += `border:1px solid ${theme.accent};`;
     }
@@ -320,7 +346,7 @@ box-shadow:0 0 35px rgba(176,108,255,.28);
 <div style="margin-top:24px;font-size:18px;opacity:.85;color:${esc(theme.accent)};text-shadow:0 0 14px ${esc(theme.accent)};">— ${html(state.content.signature)}</div>` : "";
 
     const cinematicOverlay = state.style.outputMode === "cinematic" ? `
-<div style="position:absolute;inset:-1px;border-radius:inherit;pointer-events:none;background:radial-gradient(circle at 20% 0%,${esc(theme.accent)}22,transparent 35%),radial-gradient(circle at 80% 100%,${esc(theme.accent4)}22,transparent 35%);z-index:-1;"></div>` : "";
+<div style="position:absolute;inset:-1px;border-radius:inherit;pointer-events:none;background:radial-gradient(circle at 20% 0%,${esc(theme.accent)}55,transparent 35%),radial-gradient(circle at 80% 100%,${esc(theme.accent4)}44,transparent 35%);z-index:-1;"></div>` : "";
 
 const youtubeOverlay =
 state.style.socialExport === "youtube" ? `
@@ -402,7 +428,15 @@ YOUTUBE PREVIEW
     box-sizing:border-box;
     text-align:center;
     overflow:visible;
-    box-shadow:0 0 40px rgba(0,0,0,.35),0 0 ${Number(theme.glowPower) || 55}px ${esc(theme.accent3)};
+    isolation:isolate;
+   box-shadow:
+0 0 25px rgba(0,0,0,.45),
+
+0 0 35px ${esc(theme.accent)},
+0 0 75px ${esc(theme.accent3)},
+0 0 140px ${esc(theme.accent4)},
+
+inset 0 0 25px rgba(255,255,255,.04);
     ${look.extraStyle}
   ">
     ${cinematicOverlay}
