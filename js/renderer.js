@@ -192,19 +192,121 @@ if(state.style.textMood === "parchment"){
 titleFontFamily,  mainFontStyle, mainLetterSpacing, extraStyle, cardWidth, cardRadius, cardPadding, minHeight };
   }
 
-  function socialButton(state, publicUrl){
-    const url = publicUrl || state.github.lastPublishedUrl || "";
-    if(!url) return "";
-    const eurl = encodeURIComponent(url);
+ function socialButton(state, publicUrl){
 
-    if(state.style.socialExport === "whatsapp"){
-      return `<div style="margin-top:25px;text-align:center;"><a href="https://wa.me/?text=${eurl}" target="_blank" style="display:inline-block;padding:16px 34px;border-radius:999px;background:linear-gradient(90deg,#25d366,#4bf58a);color:white;text-decoration:none;font-size:18px;font-weight:bold;box-shadow:0 0 35px rgba(37,211,102,.28);">💬 CONDIVIDI WHATSAPP</a></div>`;
-    }
-    if(state.style.socialExport === "facebook"){
-      return `<div style="margin-top:25px;text-align:center;"><a href="https://www.facebook.com/sharer/sharer.php?u=${eurl}" target="_blank" style="display:inline-block;padding:16px 34px;border-radius:999px;background:linear-gradient(90deg,#1877f2,#4e9cff);color:white;text-decoration:none;font-size:18px;font-weight:bold;box-shadow:0 0 35px rgba(24,119,242,.28);">📘 CONDIVIDI FACEBOOK</a></div>`;
-    }
-    return `<div style="margin-top:25px;text-align:center;"><button type="button" onclick="TemeriaPublicPlayer.copy('${esc(url)}')" style="padding:16px 34px;border:none;cursor:pointer;border-radius:999px;background:linear-gradient(90deg,#00f6ff,#b06cff);color:white;font-size:18px;font-weight:bold;box-shadow:0 0 35px rgba(176,108,255,.28);">🔗 COPIA LINK</button></div>`;
+  const url =
+    publicUrl ||
+    state.github.lastPublishedUrl ||
+    "";
+
+  if(!url) return "";
+
+  const eurl =
+    encodeURIComponent(url);
+
+  /* =========================
+     WHATSAPP
+  ========================= */
+
+  if(state.style.socialExport === "whatsapp"){
+
+    const shareText =
+`☀️ ${state.content.title || "Temeria Card"}
+
+${state.content.phrase || ""}
+
+${url}`;
+
+    const wa =
+      encodeURIComponent(shareText);
+
+    return `
+<div style="margin-top:25px;text-align:center;">
+
+<a
+href="https://wa.me/?text=${wa}"
+target="_blank"
+
+style="
+display:inline-block;
+padding:16px 34px;
+border-radius:999px;
+background:linear-gradient(90deg,#25d366,#4bf58a);
+color:white;
+text-decoration:none;
+font-size:18px;
+font-weight:bold;
+box-shadow:0 0 35px rgba(37,211,102,.28);
+">
+
+💬 CONDIVIDI WHATSAPP
+
+</a>
+
+</div>`;
   }
+
+  /* =========================
+     FACEBOOK
+  ========================= */
+
+  if(state.style.socialExport === "facebook"){
+
+    return `
+<div style="margin-top:25px;text-align:center;">
+
+<a
+href="https://www.facebook.com/sharer/sharer.php?u=${eurl}"
+target="_blank"
+
+style="
+display:inline-block;
+padding:16px 34px;
+border-radius:999px;
+background:linear-gradient(90deg,#1877f2,#4e9cff);
+color:white;
+text-decoration:none;
+font-size:18px;
+font-weight:bold;
+box-shadow:0 0 35px rgba(24,119,242,.28);
+">
+
+📘 CONDIVIDI FACEBOOK
+
+</a>
+
+</div>`;
+  }
+
+  /* =========================
+     DEFAULT COPY LINK
+  ========================= */
+
+  return `
+<div style="margin-top:25px;text-align:center;">
+
+<button
+type="button"
+onclick="TemeriaPublicPlayer.copy('${esc(url)}')"
+
+style="
+padding:16px 34px;
+border:none;
+cursor:pointer;
+border-radius:999px;
+background:linear-gradient(90deg,#00f6ff,#b06cff);
+color:white;
+font-size:18px;
+font-weight:bold;
+box-shadow:0 0 35px rgba(176,108,255,.28);
+">
+
+🔗 COPIA LINK
+
+</button>
+
+</div>`;
+}
 
   function renderCard(state, options = {}){
     const look = computeLook(state);
