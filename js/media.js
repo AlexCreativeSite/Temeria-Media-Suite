@@ -133,7 +133,7 @@ position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;left:-9999p
       `enablejsapi=1&playsinline=1&loop=1&playlist=${id}` +
       `&controls=0&modestbranding=1&rel=0&iv_load_policy=3&disablekb=1&fs=0` +
       `&origin=${encodeURIComponent(location.origin)}` +
-      (autoplay ? `&autoplay=1&mute=0` : ``);
+      (autoplay ? `&autoplay=1&mute=1` : ``);
   }
 
   function buildYoutubeHidden(id){
