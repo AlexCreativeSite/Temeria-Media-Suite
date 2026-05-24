@@ -210,10 +210,16 @@ titleFontFamily,  mainFontStyle, mainLetterSpacing, extraStyle, cardWidth, cardR
 
   if(state.style.socialExport === "whatsapp"){
 
-    const shareText =
-`☀️ ${state.content.title || "Temeria Card"}
+   const shortPhrase =
+  (state.content.phrase || "")
+    .replace(/\n/g," ")
+    .trim()
+    .slice(0, 90);
 
-${state.content.phrase || ""}
+const shareText =
+`${state.content.title || "Temeria Card"}
+
+${shortPhrase}...
 
 ${url}`;
 
