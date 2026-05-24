@@ -66,3 +66,52 @@
 
   window.addEventListener("load", init);
 })();
+window.addEventListener("load", init);
+})();
+
+function importaDaHTML(){
+
+  try{
+
+    const html =
+      document.getElementById("importBox")?.value || "";
+
+    if(!html.trim()){
+      alert("Incolla prima una card HTML.");
+      return;
+    }
+
+    const parser =
+      new DOMParser();
+
+    const doc =
+      parser.parseFromString(html,"text/html");
+
+    const title =
+      doc.querySelector("h1,h2,.title")?.textContent?.trim() || "";
+
+    const text =
+      doc.body?.textContent?.trim() || "";
+
+    if(document.getElementById("titolo")){
+      document.getElementById("titolo").value = title;
+    }
+
+    if(document.getElementById("frase")){
+      document.getElementById("frase").value =
+        text.slice(0,500);
+    }
+
+    if(typeof genera === "function"){
+      genera();
+    }
+
+    alert("Card importata.");
+
+  }catch(err){
+
+    console.error(err);
+
+    alert("Errore importazione HTML.");
+  }
+}
