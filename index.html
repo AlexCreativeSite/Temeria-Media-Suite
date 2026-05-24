@@ -722,6 +722,37 @@ function saveGitHubToken(){
   alert("Token GitHub salvato.");
 }
 </script>
+<script>
+function saveToHistory(){
+  try{
+    const data = window.TemeriaForge?.collectState
+      ? window.TemeriaForge.collectState()
+      : {};
+
+    const history =
+      JSON.parse(localStorage.getItem("TEMERIA_CARD_HISTORY") || "[]");
+
+    history.unshift({
+      id: Date.now(),
+      title: document.getElementById("titolo")?.value || "Card Temeria",
+      date: new Date().toLocaleString(),
+      data
+    });
+
+    localStorage.setItem(
+      "TEMERIA_CARD_HISTORY",
+      JSON.stringify(history.slice(0, 30))
+    );
+
+    alert("Card salvata in History.");
+    if(typeof renderHistory === "function") renderHistory();
+
+  }catch(err){
+    console.error(err);
+    alert("Errore salvataggio History.");
+  }
+}
+</script>
 </body>
 
 </html>
