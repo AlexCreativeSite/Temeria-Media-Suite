@@ -525,7 +525,6 @@ window.addEventListener("load", () => {
   "c_accent3",
   "c_accent4",
   "glowPower",
-  "videoPoster"
 ].forEach(id => {
     const el = document.getElementById(id);
     if (!el) return;
