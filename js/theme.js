@@ -517,15 +517,16 @@ window.addEventListener("load", () => {
     preset.addEventListener("change", applyThemeToUI);
   }
 
-  [
-    "c_bg",
-    "c_txt",
-    "c_accent",
-    "c_accent2",
-    "c_accent3",
-    "c_accent4",
-    "glowPower"
-  ].forEach(id => {
+[
+  "c_bg",
+  "c_txt",
+  "c_accent",
+  "c_accent2",
+  "c_accent3",
+  "c_accent4",
+  "glowPower",
+  "videoPoster"
+].forEach(id => {
     const el = document.getElementById(id);
     if (!el) return;
 
