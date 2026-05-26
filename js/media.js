@@ -77,7 +77,7 @@ box-shadow:0 0 25px ${esc(state.theme.accent)};
 
     if(mode === "visible_controls"){
       return `
-<video src="${esc(videoSrc)}" controls playsinline preload="metadata" poster="${esc(state.media.mainImagePublic || state.media.mainImage || '')}" style="
+<video src="${esc(videoSrc)}" controls playsinline preload="metadata" poster="${esc(state.media.mainImagePublic || state.media.mainImage || state.media.mainImageRaw || '')}" style="
 width:100%;margin-top:25px;border-radius:22px;display:block;
 box-shadow:0 0 30px rgba(0,0,0,.35);
 "></video>`;
