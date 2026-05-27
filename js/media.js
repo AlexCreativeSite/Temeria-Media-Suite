@@ -88,7 +88,14 @@ box-shadow:0 0 30px rgba(0,0,0,.35);
 
       return `
 <div style="margin-top:25px;text-align:center;">
-  <video id="${id}" src="${esc(videoSrc)}" playsinline preload="metadata" loop style="
+  <video
+  id="${id}"
+  src="${esc(videoSrc)}"
+  playsinline
+  preload="metadata"
+  loop
+  poster="${esc(state.media.mainImagePublic || state.media.mainImage || state.media.mainImageRaw || '')}"
+  style="
     width:100%;border-radius:22px;display:block;box-shadow:0 0 30px rgba(0,0,0,.35);
   "></video>
 
