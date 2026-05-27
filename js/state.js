@@ -332,26 +332,55 @@ localStorage.setItem(
   }
 
   function saveToHistory(){
-    const state = collectState();
-    const raw = localStorage.getItem(HISTORY_KEY);
-    let list = [];
-    try{ list = raw ? JSON.parse(raw) : []; }catch(e){ list = []; }
 
-    list.unshift({
-      savedAt: new Date().toISOString(),
-      title: state.content.title || "Card senza titolo",
-      state
-    });
+  const state = collectState();
 
-    list = list.slice(0, 25);
-    localStorage.setItem(HISTORY_KEY, JSON.stringify(list));
-    renderHistoryList();
+  const safeState =
+    JSON.parse(JSON.stringify(state));
+
+  /* =========================
+     REMOVE HUGE RAW DATA
+  ========================= */
+
+  safeState.media.mainImageRaw = "";
+
+  if(
+    safeState.media.videoUrl?.startsWith("data:")
+  ){
+    safeState.media.videoUrl = "";
   }
 
-  function clearHistory(){
-    localStorage.removeItem(HISTORY_KEY);
-    renderHistoryList();
+  if(
+    safeState.media.mp3Url?.startsWith("data:")
+  ){
+    safeState.media.mp3Url = "";
   }
+
+  const raw = localStorage.getItem(HISTORY_KEY);
+
+  let list = [];
+
+  try{
+    list = raw ? JSON.parse(raw) : [];
+  }catch(e){
+    list = [];
+  }
+
+  list.unshift({
+    savedAt: new Date().toISOString(),
+    title: state.content.title || "Card senza titolo",
+    state: safeState
+  });
+
+  list = list.slice(0, 25);
+
+  localStorage.setItem(
+    HISTORY_KEY,
+    JSON.stringify(list)
+  );
+
+  renderHistoryList();
+}
 
   function renderHistoryList(){
     const host = $("historyList");
@@ -376,7 +405,10 @@ localStorage.setItem(
       </div>
     `).join("");
   }
-
+function clearHistory(){
+  localStorage.removeItem(HISTORY_KEY);
+  renderHistoryList();
+}
   function restoreHistory(index){
     const raw = localStorage.getItem(HISTORY_KEY);
     let list = [];
