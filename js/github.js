@@ -378,9 +378,13 @@ async function uploadImage(state, token, prefix){
       CONFIG.fallbackOGImage;
 
     state.github.ogImageUrl = existing;
-    state.media.mainImagePublic = existing;
 
-    return existing;
+/* Non trasformare la fallback in immagine principale */
+if(state.media.mainImagePublic || state.media.mainImage || state.media.mainImageRaw){
+  state.media.mainImagePublic = existing;
+}
+
+return existing;
   }
 
   if(isHttpUrl(img)){
